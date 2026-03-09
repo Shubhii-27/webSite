@@ -1,4 +1,5 @@
 import React from "react";
+import img from "../assets/images/CodeLearn.png"
 
 const Footer = () => {
   return (
@@ -7,12 +8,14 @@ const Footer = () => {
 
         {/* Logo Section */}
         <div>
-          <img
-            src="https://via.placeholder.com/150x60"
-            alt="Website Logo"
-            className="mb-4"
-          />
-          <p className="text-sm">
+           <img
+              src={img}
+              alt="Website Logo"
+              className="w-20 h-20 rounded-full"
+            />
+          <p className="text-md font-size Class	Color
+text-blue-500	Red
+text-blue-500 ">
             Simple React website for beginners.
           </p>
         </div>

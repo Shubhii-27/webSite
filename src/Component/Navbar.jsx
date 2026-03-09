@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import img from "../assets/images/CodeLearn.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,13 +11,21 @@ const Navbar = () => {
       : "block hover:text-blue-400 transition";
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow-md h-20">
+      <div className="max-w-7xl mx-auto px-6 py- flex items-center justify-between">
         
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-blue-400">
-          <Link to="/">CodeLearn</Link>
-        </h1>
+      <div className="flex items-center gap-3">
+  <img
+    src={img}
+    alt="Website Logo"
+    className="w-20 h-20 rounded-full"
+  />
+
+  <h1 className="text-3xl font-bold text-blue-400">
+    <Link to="/">CodeLearn</Link>
+  </h1>
+</div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
@@ -38,7 +47,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden  right-0 bg-gray-00 px-6 overflow-hidden transition-all duration-300 text-2xl text-center ${
+        className={`md:hidden  right-0 bg-gray-500 px-6 overflow-hidden transition-all duration-300 text-2xl text-center ${
           isOpen ? "max-h-96 py-4" : "max-h-0"
         }`}
       >
