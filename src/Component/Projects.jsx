@@ -47,10 +47,10 @@ const Projects = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-8">
+    <div className="min-h-screen bg-slate-900 pt-24 pb-12 px-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
-        <h1 className="text-4xl font-bold text-gray-800">My Projects</h1>
+        <h1 className="text-4xl font-bold text-white">My Projects</h1>
         <div className="flex gap-4">
           <button
             onClick={() => navigate("/")}
@@ -66,7 +66,7 @@ const Projects = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
+            className="bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
           >
             {/* Project Image */}
             <img

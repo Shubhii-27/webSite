@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const About = () => {
   const navigate = useNavigate();
 
+  const [stats, setStats] = useState([
+    { number: 0, label: "Programming Languages", target: 12 },
+    { number: 0, label: "Real Projects", target: 60 },
+    { number: 0, label: "Active Learners", target: 2000 },
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStats((prevStats) =>
+        prevStats.map((item) => {
+          if (item.number < item.target) {
+            return { ...item, number: item.number + Math.ceil(item.target / 50) };
+          }
+          return { ...item, number: item.target };
+        })
+      );
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 text-white">
-      
+
       {/* Top Bar */}
       <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
         <h2 className="text-xl font-semibold tracking-wide">CodeMaster</h2>
@@ -45,17 +66,13 @@ const About = () => {
 
       {/* Stats Section */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8 text-center">
-        {[
-          { number: "12+", label: "Programming Languages" },
-          { number: "60+", label: "Real Projects" },
-          { number: "2000+", label: "Active Learners" },
-        ].map((item, i) => (
+        {stats.map((item, i) => (
           <div
             key={i}
             className="bg-white/10 backdrop-blur-lg rounded-xl p-8 shadow-lg"
           >
             <h3 className="text-4xl font-bold text-indigo-400 mb-2">
-              {item.number}
+              {item.number}+
             </h3>
             <p className="text-gray-300">{item.label}</p>
           </div>

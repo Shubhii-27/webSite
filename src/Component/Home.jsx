@@ -73,17 +73,18 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-12 md:pt-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://d3h2k7ug3o5pb3.cloudfront.net/image/2020-12-03/84256810-354d-11eb-be48-092568f6a231.jpg')",
-          }}
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex items-center justify-center">
+        {/* Background Image */}
+        <img
+          src="https://d3h2k7ug3o5pb3.cloudfront.net/image/2020-12-03/84256810-354d-11eb-be48-092568f6a231.jpg"
+          alt="Hero Background"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/90"></div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90"></div>
 
+        {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 animate-fadeUp">
             Learn Programming the Smart Way
@@ -94,7 +95,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CONTENT */}
+      {/* CONTENT SECTION */}
       <section className="max-w-7xl mx-auto px-6 py-24">
         {/* Search Bar */}
         <div className="mb-14 flex justify-between items-center flex-wrap gap-4">
@@ -110,7 +111,7 @@ const Home = () => {
           />
         </div>
 
-        {/* Cards */}
+        {/* Technology Cards */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {filteredLanguages.map((lang, index) => (
             <div
@@ -168,7 +169,7 @@ const Home = () => {
         </div>
       )}
 
-      {/* Scroll buttons */}
+      {/* Scroll Buttons */}
       <button
         onClick={scrollToBottom}
         className="fixed bottom-24 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-2xl"
@@ -192,8 +193,7 @@ const Home = () => {
             100% { opacity: 1; transform: translateY(0); }
           }
           .animate-fadeUp { animation: fadeUp 1s ease-out forwards; }
-          .animate-fadeUp.delay-200 { animation-delay: .2s; }
-          .animate-fadeUp.delay-400 { animation-delay: .4s; }
+          .animate-fadeUp.delay-200 { animation-delay: 0.2s; }
         `}
       </style>
     </div>

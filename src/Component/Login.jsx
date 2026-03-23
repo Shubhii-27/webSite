@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Auth = () => {
   const navigate = useNavigate();
 
-  // ✅ Login by default true rakha
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👁️ state
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,51 +18,50 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+    setMessage("");
+
     try {
       let res;
 
       if (isLogin) {
-        // 🔹 LOGIN API
+        // 🔹 LOGIN
         res = await axios.post(
           "http://localhost:5000/api/auth/login",
           { email, password }
         );
 
-        // ✅ Token save only on login
-        localStorage.setItem("token", res.data.token);
-
-        setMessage("Login Successful ✅");
-
-        // ✅ Dashboard sirf login ke baad
         setTimeout(() => {
+          localStorage.setItem("token", res.data.token);
+          setMessage("Login Successful ✅");
+          setLoading(false);
           navigate("/dashboard");
-        }, 1000);
-
+        }, 2000);
       } else {
-        // 🔹 REGISTER API
+        // 🔹 REGISTER
         await axios.post(
           "http://localhost:5000/api/auth/register",
           { name, email, password }
         );
 
-        setMessage("Registration Successful ✅ Please Login");
+        setTimeout(() => {
+          setMessage("Registration Successful ✅ Please Login");
+          setIsLogin(true);
+          setLoading(false);
 
-        // 👇 Register ke baad login page dikhao
-        setIsLogin(true);
-
-        // Clear form
-        setName("");
-        setEmail("");
-        setPassword("");
+          setName("");
+          setEmail("");
+          setPassword("");
+        }, 2000);
       }
-
     } catch (error) {
+      setLoading(false);
       setMessage(error.response?.data?.message || "Operation Failed ❌");
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
+    <div className="min-h-screen flex bg-slate-800">
       <div className="w-full flex items-center justify-center p-12">
         <div className="bg-white w-full max-w-md p-12 rounded-2xl shadow-2xl">
 
@@ -78,6 +79,7 @@ const Auth = () => {
                 onChange={(e) => setName(e.target.value)}
                 className="p-3 border rounded-lg"
                 required
+                disabled={loading}
               />
             )}
 
@@ -88,31 +90,54 @@ const Auth = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="p-3 border rounded-lg"
               required
+              disabled={loading}
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="p-3 border rounded-lg"
-              required
-            />
+            {/* 👁️ Password Field with Eye Icon */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="p-3 border rounded-lg w-full pr-10"
+                required
+                disabled={loading}
+              />
+
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 cursor-pointer text-gray-600"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
 
             <button
               type="submit"
-              className="bg-blue-600 text-white py-3 rounded-lg"
+              disabled={loading}
+              className="bg-blue-600 text-white py-3 rounded-lg flex justify-center items-center"
             >
-              {isLogin ? "Login" : "Register"}
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+                  Please wait...
+                </span>
+              ) : (
+                isLogin ? "Login" : "Register"
+              )}
             </button>
+
           </form>
 
-          {message && (
+          {/* ✅ Message */}
+          {message && !loading && (
             <p className="mt-4 text-center font-semibold text-green-600">
               {message}
             </p>
           )}
 
+          {/* Toggle Login/Register */}
           <button
             onClick={() => {
               setIsLogin(!isLogin);
@@ -125,6 +150,7 @@ const Auth = () => {
               : "Already have an account? Login"}
           </button>
 
+          {/* Home */}
           <button
             onClick={() => navigate("/")}
             className="mt-2 text-blue-600 underline block mx-auto"

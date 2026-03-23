@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../assets/images/codelearn.png"
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -22,12 +23,25 @@ text-blue-500 ">
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-white font-semibold mb-3">Quick Links</h4>
-          <p className="hover:text-white cursor-pointer mb-1">Home</p>
-          <p className="hover:text-white cursor-pointer mb-1">About</p>
-          <p className="hover:text-white cursor-pointer">Contact</p>
-        </div>
+  <h4 className="text-white font-semibold mb-3">Quick Links</h4>
 
+  <Link to="/" className="block hover:text-white cursor-pointer mb-1">
+    Home
+  </Link>
+
+  <Link to="/about" className="block hover:text-white cursor-pointer mb-1">
+    About
+  </Link>
+
+  <Link to="/contact" className="block hover:text-white cursor-pointer mb-1">
+    Contact
+  </Link>
+
+  <Link to="/login" className="block hover:text-white cursor-pointer">
+    Login
+  </Link>
+
+</div>
         {/* Footer Info */}
         <div>
           <h4 className="text-white font-semibold mb-3">Info</h4>
@@ -37,11 +51,36 @@ text-blue-500 ">
 
         {/* Social Links */}
         <div>
-          <h4 className="text-white font-semibold mb-3">Follow Us</h4>
-          <p className="hover:text-white cursor-pointer">LinkedIn</p>
-          <p className="hover:text-white cursor-pointer">GitHub</p>
-          <p className="hover:text-white cursor-pointer">Twitter</p>
-        </div>
+  <h4 className="text-white font-semibold mb-3">Follow Us</h4>
+
+  <a 
+    href="https://www.linkedin.com/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="block hover:text-white cursor-pointer"
+  >
+    LinkedIn
+  </a>
+
+  <a 
+    href="https://github.com/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="block hover:text-white cursor-pointer"
+  >
+    GitHub
+  </a>
+
+  <a 
+    href="https://twitter.com/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="block hover:text-white cursor-pointer"
+  >
+    Twitter
+  </a>
+
+</div>
 
       </div>
     </footer>
