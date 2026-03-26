@@ -7,10 +7,10 @@ import Navbar from "./Component/Navbar";
 import Footer from "./Component/Footer";
 import Home from "./Component/Home";
 import About from "./Component/About";
-// import Skills from "./Component/Skills"; // ❌ Removed
-import Projects from "./Component/Projects"; // ✅ Make sure folder name matches
+
+import Projects from "./Component/Projects"; 
 import Contact from "./Component/Contact";
-import Login from "./Component/Login"; // ✅ Added
+import Login from "./Component/Login";
 import Mydetail from "./Component/Mydetail";
 import Dashboard from "./Component/Dashboard";
 import Success from "./Component/SuccessDashboard";
